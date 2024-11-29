@@ -1,11 +1,15 @@
 ROOT_DIR = $(patsubst %/,%,$(dir $(abspath $(firstword $(MAKEFILE_LIST)))))
 
-CPPFLAGS += -MMD -I$(ROOT_DIR)/inc
-CXXFLAGS += --std=c++17 -O3 -Wall -Wextra -Wshadow -Wpedantic
+CPPFLAGS += -MMD -I$(ROOT_DIR)/inc -I/Users/himanshuyadav/Desktop/mainFolder/programming/CLI/CLI11/include -I/opt/homebrew/Cellar/fmt/11.0.2/include -I/opt/homebrew/Cellar/xz/5.6.3/include
+CPPFLAGS += -I/Users/himanshuyadav/Desktop/mainFolder/programming/json/json/include
+CXXFLAGS += --std=c++17  -O3 -Wall -Wextra -Wshadow -Wpedantic -g
+#CXXFLAGS += -DDEBUG_PRINT
 
 # vcpkg integration
 TRIPLET_DIR = $(patsubst %/,%,$(firstword $(filter-out $(ROOT_DIR)/vcpkg_installed/vcpkg/, $(wildcard $(ROOT_DIR)/vcpkg_installed/*/))))
-CPPFLAGS += -isystem $(TRIPLET_DIR)/include
+#CPPFLAGS += -isystem $(TRIPLET_DIR)/include
+CPPFLAGS += -isystem $(TRIPLET_DIR)/include -L/opt/homebrew/Cellar/fmt/11.0.2/lib
+
 LDFLAGS  += -L$(TRIPLET_DIR)/lib -L$(TRIPLET_DIR)/lib/manual-link
 LDLIBS   += -llzma -lz -lbz2 -lfmt
 
